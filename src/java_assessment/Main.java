@@ -43,9 +43,12 @@ public class Main
                 case 6:
                     showCoursesSummary( courseService, scanner );
                     break;
+                case 7:
+                    averageGrade ( studentService, courseService, scanner );
+                    break;
             }
         }
-        while ( option != 7 );
+        while ( option != 8 );
     }
 
     private static void enrollStudentToCourse( StudentService studentService, CourseService courseService,
@@ -82,12 +85,7 @@ public class Main
 
     private static void showStudentsSummary( StudentService studentService, Scanner scanner )
     {
-        studentService.showSummary();
-    }
-
-    private static void gradeStudent( StudentService studentService, Scanner scanner )
-    {
-
+        studentService.showSummary                                                 ();
     }
 
     private static void findStudent( StudentService studentService, Scanner scanner )
@@ -105,6 +103,43 @@ public class Main
             System.out.println( "Student with Id = " + studentId + " not found" );
         }
     }
+
+    private static void gradeStudent(StudentService studentService, Scanner scanner) {
+        // Step 1: Ask for the student ID
+        System.out.println("Enter student ID:");
+        String studentId = scanner.next();
+        Student student = studentService.findStudent(studentId);
+
+        if (student == null) {
+            System.out.println("Invalid Student ID");
+            return;
+        }
+
+        // Step 2: Ask for the course ID
+        System.out.println("Enter course ID:");
+        String courseId = scanner.next();
+        Course course = studentService.findStudentCourse(studentId, courseId);
+
+        if (courseId == null) {
+            System.out.println("Invalid Course ID or the student is not enrolled in this course.");
+            return;
+        }
+
+        // Step 3: Ask for the grade
+        System.out.println("Enter the grade for the student in this course:");
+        double grade = scanner.nextDouble();
+
+        // Step 4: Update the student's grade in the course
+        studentService.updateGrade(studentId, courseId, grade);
+
+        System.out.println("Grade updated successfully!");
+    }
+
+
+    private static void averageGrade(StudentService studentService, CourseService courseService, Scanner scanner) {
+
+    }
+
 
     private static void registerStudent( StudentService studentService, Scanner scanner )
             throws ParseException

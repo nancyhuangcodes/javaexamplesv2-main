@@ -5,22 +5,13 @@ public class Course {
     // attributes for the Course
     String name;    // name
     String id;      // id
-    int credit;     // credits
+    double grade;     // grades
+    private String courseName;
 
     public Course(String name, String id, int credit) {
         this.name = name;
         this.id = id;
-        this.credit = credit;
-    }
-
-    public Course() {
-        name = "";
-        id = "";
-        credit = 0;
-    }
-
-    public int getCredit() {
-        return credit;
+        this.grade = getGrade();
     }
 
     public String getId() {
@@ -31,6 +22,24 @@ public class Course {
         return name;
     }
 
+    // Getter and setter for courseName
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    // Getter and setter for grade
+    public double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+
     @Override                       // OVERRIDE the default toString() method
     public String toString() {      // for a Java class
         return "Course{'" +
@@ -38,7 +47,11 @@ public class Course {
                 name + "'," +
                 "'id':'" +
                 id + "'," +
-                "'credits':" +
-                credit + "}";
+                "'grade':" +
+                grade + "}";
+    }
+
+    public Object getCourseId() {
+        return null;
     }
 }
